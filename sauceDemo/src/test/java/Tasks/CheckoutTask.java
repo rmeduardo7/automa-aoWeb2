@@ -1,6 +1,7 @@
 package Tasks;
 
 import PageObjects.CheckoutPage;
+import Validacao.CheckoutValidacao;
 import Validacao.GenericValidacao;
 import org.openqa.selenium.WebDriver;
 
@@ -9,12 +10,14 @@ public class CheckoutTask {
     private WebDriver driver;
     private CheckoutPage checkoutPage;
     private GenericValidacao genericValidacao;
+    private CheckoutValidacao checkoutValidacao;
 
     public CheckoutTask(WebDriver driver){
 
         this.driver = driver;
         checkoutPage = new CheckoutPage(this.driver);
         genericValidacao = new GenericValidacao(this.driver);
+        checkoutValidacao = new CheckoutValidacao(this.driver);
     }
 
     public void preencherCheckout(){
@@ -23,6 +26,7 @@ public class CheckoutTask {
         checkoutPage.getFirstNameInput().sendKeys("Eduardo");
         checkoutPage.getlastNameInput().sendKeys("de Melo");
         checkoutPage.getZipCodeInput().sendKeys("91720170");
+        checkoutValidacao.validaForm();
         checkoutPage.getContinueButton().click();
         genericValidacao.validationTitlePages("Checkout: Overview");
         genericValidacao.validationProduto();
